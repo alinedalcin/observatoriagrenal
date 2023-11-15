@@ -1,5 +1,6 @@
 library(data.table) 
-library(tidyverse)
+library(dplyr)
+library(tidyr)
 library(shiny)
 library(tibble) 
 library(shinythemes)
@@ -17,14 +18,14 @@ shinyServer(function(input, output) {
     if(length(input$campeonato_v)==0) return(NULL)
     if(is.na(input$data_escolhida_v[2])) return(NULL)
     if(is.na(input$data_escolhida_v[1])) return(NULL)
-    if((input$data_escolhida_v)<'1909-07-18') return(NULL)
-    if((input$data_escolhida_v)>Sys.Date()) return(NULL)
+#   if((input$data_escolhida_v)<'1909-07-18') return(NULL)
+#   if((input$data_escolhida_v)>Sys.Date()) return(NULL)
     if((input$data_escolhida_v[1])>input$data_escolhida_v[2]) return(NULL)
 
     estadio_escolhido_v <- input$estadio_v
     campeonato_escolhido_v <- input$campeonato_v
     
-    data_vitorias <- tbl_df(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
+    data_vitorias <- as_tibble(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
       arrange(N)
     
     data_vitorias$data2 <-as.Date(data_vitorias$data, format="%d/%m/%Y")
@@ -67,14 +68,14 @@ shinyServer(function(input, output) {
         if(length(input$campeonato_v2)==0) return(NULL)
         if(is.na(input$data_escolhida_v2[2])) return(NULL)
         if(is.na(input$data_escolhida_v2[1])) return(NULL)
-        if((input$data_escolhida_v2)<'1909-07-18') return(NULL)
-        if((input$data_escolhida_v2)>Sys.Date()) return(NULL)
+#       if((input$data_escolhida_v2)<'1909-07-18') return(NULL)
+#       if((input$data_escolhida_v2)>Sys.Date()) return(NULL)
         if((input$data_escolhida_v2[1])>input$data_escolhida_v2[2]) return(NULL)
         
         estadio_escolhido_v2 <- input$estadio_v2
         campeonato_escolhido_v2 <- input$campeonato_v2
         
-        data_vitorias <- tbl_df(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
+        data_vitorias <- as_tibble(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
           arrange(N)
         
         data_vitorias$data2 <-as.Date(data_vitorias$data, format="%d/%m/%Y")
@@ -121,14 +122,14 @@ shinyServer(function(input, output) {
     if(length(input$campeonato_g)==0) return(NULL)
     if(is.na(input$data_escolhida_g[2])) return(NULL)
     if(is.na(input$data_escolhida_g[1])) return(NULL)
-    if((input$data_escolhida_g)<'1909-07-18') return(NULL)
-    if((input$data_escolhida_g)>Sys.Date()) return(NULL)
+#   if((input$data_escolhida_g)<'1909-07-18') return(NULL)
+#   if((input$data_escolhida_g)>Sys.Date()) return(NULL)
     if((input$data_escolhida_g[1])>input$data_escolhida_g[2]) return(NULL)
     
     if (time_escolhido_g=="Grêmio") color <- "deepskyblue"
     if (time_escolhido_g=="Internacional") color <- "red"
     
-    data_gols <- tbl_df(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
+    data_gols <- as_tibble(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
       select(gremio, inter, saldo_gremio, saldo_inter, estadio, campeonato, N, data) %>%
       gather(time, valor, gremio, inter, saldo_gremio, saldo_inter)
     
@@ -159,15 +160,15 @@ shinyServer(function(input, output) {
     if(length(input$campeonato_hg)==0) return(NULL)
     if(is.na(input$data_escolhida_hg[2])) return(NULL)
     if(is.na(input$data_escolhida_hg[1])) return(NULL)
-    if((input$data_escolhida_hg)<'1909-07-18') return(NULL)
-    if((input$data_escolhida_hg)>Sys.Date()) return(NULL)
+ #  if((input$data_escolhida_hg)<'1909-07-18') return(NULL)
+ #  if((input$data_escolhida_hg)>Sys.Date()) return(NULL)
     if((input$data_escolhida_hg[1])>input$data_escolhida_hg[2]) return(NULL)
 
     estadio_escolhido_hg <- input$estadio_hg
     campeonato_escolhido_hg <- input$campeonato_hg
     time_escolhido_hg <- input$time_hg
 
-    data_hg <- tbl_df(fread(input="HomemGrenal.csv", sep=";", encoding = 'UTF-8')) 
+    data_hg <- as_tibble(fread(input="HomemGrenal.csv", sep=";", encoding = 'UTF-8')) 
     
     data_hg$data2 <-as.Date(data_hg$data, format="%d/%m/%Y")
     
@@ -196,14 +197,14 @@ shinyServer(function(input, output) {
     if(length(input$campeonato_p)==0) return(NULL)
     if(is.na(input$data_escolhida_p[2])) return(NULL)
     if(is.na(input$data_escolhida_p[1])) return(NULL)
-    if((input$data_escolhida_p)<'1909-07-18') return(NULL)
-    if((input$data_escolhida_p)>Sys.Date()) return(NULL)
+#   if((input$data_escolhida_p)<'1909-07-18') return(NULL)
+#   if((input$data_escolhida_p)>Sys.Date()) return(NULL)
     if((input$data_escolhida_p[1])>input$data_escolhida_p[2]) return(NULL)
     
     estadio_escolhido_p <- input$estadio_p
     campeonato_escolhido_p <- input$campeonato_p
     
-    data_placar <- tbl_df(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
+    data_placar <- as_tibble(fread(input="GrenalVis.csv", sep=";", encoding = 'UTF-8')) %>%
       arrange(N)
     
     data_placar$data2 <-as.Date(data_placar$data, format="%d/%m/%Y")

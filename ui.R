@@ -1,5 +1,6 @@
 library(data.table) 
-library(tidyverse)
+library(dplyr)
+library(tidyr)
 library(shiny) 
 library(tibble) 
 library(shinythemes) 
@@ -19,7 +20,7 @@ shinyUI(fluidPage(theme = shinytheme("journal"),
     tabPanel("Apresentação",
           h1("Observatório Grenal"),
           br(),
-          p("Grêmio e Inter se enfrentaram pela primeira vez em 1909 e mais 436 vezes depois disso."),
+          p("Grêmio e Inter se enfrentaram pela primeira vez em 1909 e mais 439 vezes depois disso."),
           p("Torcedores de Grêmio e Inter usam números para tentar convencer que seu time é o melhor no clássico Grenal."),
           p("Torcedores colorados recorrem ao fato de o Inter ter mais vitórias que o rival em toda história do clássico. Um torcedor gremista nascido na metade da década de 1980 pode revidar dizendo que viu mais vitórias do Grêmio do que do Inter em sua vida."),
           p("Torcedores gremistas recorrem ao fato de o Grêmio ter aplicado as maiores goleadas. Um torcedor colorado pode revidar dizendo que seu time aplicou mais goleadas."),
